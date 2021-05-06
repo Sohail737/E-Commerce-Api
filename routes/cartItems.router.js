@@ -12,7 +12,6 @@ router.route("/").get(async(req,res)=>{
       model:'Products',
       select:['name','price','image','discount','fastDelivery','inStock',]
     }}).exec();
-    console.log(JSON.stringify(cart))
     const cartItems=cart.length>0?cart[0]:null
     res.json({success:true,data:cartItems})
   }catch(err){
@@ -55,11 +54,9 @@ router.route("/:id").post(async(req,res)=>{
   const cart=await await Cart.find({});
   
   let cartItem=cart[0].cartItems.id(id);
-  console.log(cartItem)
   cartItem=_.extend(cartItem,updateCartItem);
 
   const savedCart=await cart[0].save();
-  console.log({savedCart})
 
   const savedCartItem=savedCart.cartItems.id(id);
 
