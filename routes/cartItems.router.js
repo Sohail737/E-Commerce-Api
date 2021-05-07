@@ -6,7 +6,6 @@ const _ =require("lodash")
 
 router.route("/").get(async(req,res)=>{
   try{
-    // const cartItems=await Cart.findById("6089c4ceedcca80d8c044425");
     const cart=await Cart.find({}).populate({path:'cartItems',populate:{
       path:'product',
       model:'Products',
